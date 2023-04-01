@@ -1,4 +1,3 @@
-from PIL import Image
 import cv2
 import time
 from math import ceil
