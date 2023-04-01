@@ -1,11 +1,13 @@
-import cv2
+from PIL import Image
+import numpy as np
 import time
 from math import ceil
 
 file_name = input('Enter image file name: ')
 dpi = int(input('Enter image dpi: '))
 
-img = cv2.imread(file_name)
+pil_img = Image.open(file_name)
+img = np.asarray(pil_img.getdata()).reshape(pil_img.size[1], pil_img.size[0], 3)
 print('Image shape:', img.shape)
 
 img_w = img.shape[1]
@@ -29,4 +31,4 @@ for r in range(num_rows):
         r_end = min(img_h, r_start + height)
 
         div = img[r_start:r_end, c_start:c_end]
-        cv2.imwrite(name(r, c), div)
+        Image.fromarray(div).save(name(r, c))
